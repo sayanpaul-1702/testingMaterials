@@ -24,11 +24,13 @@ public class SwitchingWindow {
 
 
 
-        for(String handle: handles){
-            driver.switchTo().window(handle);
+        for(int i = 1; i< handles.size();i++){
+            driver.switchTo().window(handles.get(i));
             Thread.sleep(2000);
             driver.close();
         }
+
+        driver.quit();
 
     }
 }
