@@ -1,5 +1,8 @@
+package Selenium;
+
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+
 
 import java.io.File;
 
@@ -30,6 +33,7 @@ public class TakeScreenshotTest {
         WebElement logo = driver.findElement(By.xpath("//img[contains(@alt, 'Best Website for Practice Automation Testing')]"));
         sourceFile = logo.getScreenshotAs(OutputType.FILE);
         sourceFile.renameTo(webElementFile);
+
 
     }
 }
