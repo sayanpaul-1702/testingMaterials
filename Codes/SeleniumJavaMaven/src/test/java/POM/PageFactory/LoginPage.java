@@ -27,6 +27,7 @@ public class LoginPage {
     @FindBy(className = "orangehrm-login-button")
     WebElement loginBtn;
 
+
     //action methods
     public void setInputUsername(String username){
         usernameElmt.sendKeys(username);

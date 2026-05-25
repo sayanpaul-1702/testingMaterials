@@ -10,7 +10,7 @@ import org.testng.annotations.*;
     5) Adv. Search
     6) Logout
  */
-public class AnnotationsDemo1 {
+public class AmnotationsDemo1 {
 
 
     @BeforeSuite

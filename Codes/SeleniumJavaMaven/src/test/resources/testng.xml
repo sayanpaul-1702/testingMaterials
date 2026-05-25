@@ -4,7 +4,8 @@
     <test name="TestCase1">
         <classes>
             <class name="TestNG.FirstTestCase" />
-            <class name="TestNG.AnnotationsDemo1" />
+            <class name="TestNG.AmnotationsDemo1" />
+            <class name="TestNG.AnnotationsDemo2" />
         </classes>
     </test>
 </suite>

@@ -13,6 +13,15 @@ import org.testng.annotations.Test;
 
 public class FirstTestCase {
 
+    @BeforeTest
+    void bt(){
+        System.out.println("FirstTestCase");
+    }
+
+    @AfterTest
+    void at(){
+        System.out.println("FirstTestCase");
+    }
 
     @Test(priority = 1)
     void openApp(){

@@ -27,12 +27,12 @@ public class DependencyMethods {
         switch(br){
             case "edge":
                 EdgeOptions edgeOptions = new EdgeOptions();
-                //edgeOptions.addArguments("--headless");
+                edgeOptions.addArguments("--headless");
                 driver = new EdgeDriver(edgeOptions);
                 break;
             case "chrome":
                 ChromeOptions options = new ChromeOptions();
-                //options.addArguments("--headless");
+                options.addArguments("--headless");
                 driver = new ChromeDriver(options);
                 break;
             default: return;
