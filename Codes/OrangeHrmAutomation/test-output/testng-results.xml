@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="4" passed="4" failed="0" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2026-05-26T14:59:36 IST" name="Valid Login Suite" finished-at="2026-05-26T14:59:46 IST" duration-ms="9692">
+    <groups>
+    </groups>
+    <test started-at="2026-05-26T14:59:36 IST" name="ValidLoginTest" finished-at="2026-05-26T14:59:46 IST" duration-ms="9692">
+      <class name="tests.LoginTests">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:tests.LoginTests@2b71e916]" started-at="2026-05-26T14:59:26 IST" name="setUp" finished-at="2026-05-26T14:59:36 IST" duration-ms="10147" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method is-config="true" signature="pageSetUp()[pri:0, instance:tests.LoginTests@2b71e916]" started-at="2026-05-26T14:59:38 IST" name="pageSetUp" finished-at="2026-05-26T14:59:38 IST" duration-ms="132" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- pageSetUp -->
+        <test-method signature="loginWithInvalidCredentials()[pri:1, instance:tests.LoginTests@2b71e916]" started-at="2026-05-26T14:59:38 IST" name="loginWithInvalidCredentials" finished-at="2026-05-26T14:59:40 IST" duration-ms="2604" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- loginWithInvalidCredentials -->
+        <test-method signature="loginWithValidCredentials()[pri:2, instance:tests.LoginTests@2b71e916]" started-at="2026-05-26T14:59:40 IST" name="loginWithValidCredentials" finished-at="2026-05-26T14:59:43 IST" duration-ms="3048" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- loginWithValidCredentials -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:tests.LoginTests@2b71e916]" started-at="2026-05-26T14:59:48 IST" name="tearDown" finished-at="2026-05-26T14:59:56 IST" duration-ms="8798" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- tests.LoginTests -->
+      <class name="tests.HomeTests">
+        <test-method is-config="true" signature="pageSetup()[pri:0, instance:tests.HomeTests@702657cc]" started-at="2026-05-26T14:59:43 IST" name="pageSetup" finished-at="2026-05-26T14:59:43 IST" duration-ms="9" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- pageSetup -->
+        <test-method signature="sendDataToSearch()[pri:3, instance:tests.HomeTests@702657cc]" started-at="2026-05-26T14:59:43 IST" name="sendDataToSearch" finished-at="2026-05-26T14:59:44 IST" depends-on-methods="tests.LoginTests.loginWithValidCredentials" duration-ms="535" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- sendDataToSearch -->
+        <test-method signature="navigateToPim()[pri:4, instance:tests.HomeTests@702657cc]" started-at="2026-05-26T14:59:44 IST" name="navigateToPim" finished-at="2026-05-26T14:59:46 IST" depends-on-methods="tests.HomeTests.sendDataToSearch" duration-ms="1926" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- navigateToPim -->
+      </class> <!-- tests.HomeTests -->
+    </test> <!-- ValidLoginTest -->
+  </suite> <!-- Valid Login Suite -->
+</testng-results>

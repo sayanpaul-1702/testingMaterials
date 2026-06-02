@@ -4,31 +4,33 @@ import base.BaseTests;
 import org.junit.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import pages.HomePage;
 import pages.LoginPage;
 
 public class LoginTests extends BaseTests {
 
-    public static LoginPage page;
+    public static LoginPage loginPage;
+    public static HomePage homePage;
 
     @BeforeClass
     public void pageSetUp(){
-        page = new LoginPage(driver);
+        loginPage = new LoginPage(driver);
+        homePage = new HomePage(driver);
     }
 
     @Test(priority = 1)
     public void loginWithInvalidCredentials(){
-        page.setInputUsername("abcd981y27938711")
+        loginPage.setInputUsername("abcd981y27938711")
                 .setInputPassword("12341279631623")
                 .clickLogin();
-
-        Assert.assertTrue(page.isErrorVisible());
+        Assert.assertTrue(loginPage.isErrorVisible());
     }
 
     @Test(priority = 2)
     public void loginWithValidCredentials(){
-        page.setInputUsername("Admin")
+        loginPage.setInputUsername("Admin")
                 .setInputPassword("admin123")
                 .clickLogin();
-        Assert.assertFalse(page.isErrorVisible());
+        Assert.assertEquals("Dashboard", homePage.getPageTitle());
     }
 }

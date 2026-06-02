@@ -55,14 +55,12 @@ public class TestsExample {
                 given()
                     .header("x-api-key", API_KEY)
                     .contentType("application/json")
-                    .body(obj.toJSONString())
                 .when()
                     .post("/collections/products/records?project_id=23147")
                 .then()
                     .statusCode(201)
                     .body("data.data.name", equalTo(prodName))
                     .body("data.data.price", equalTo((float) price));
-
         productId = res.extract().path("data.id");
         System.out.println((String) res.extract().path("data.id"));
     }

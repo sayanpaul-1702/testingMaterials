@@ -4,6 +4,7 @@ import driver.DriverManager;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
+import utils.ConfigReader;
 
 
 public class BaseTests {
@@ -11,7 +12,7 @@ public class BaseTests {
 
     @BeforeSuite
     public void setUp(){
-        driver = DriverManager.getDriver();
+        driver = DriverManager.getDriver(ConfigReader.get("browser.name"));
         driver.manage().window().maximize();
         driver.get("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login");
     }

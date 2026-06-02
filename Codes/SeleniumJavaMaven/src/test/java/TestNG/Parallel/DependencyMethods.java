@@ -10,6 +10,7 @@ import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
@@ -18,33 +19,47 @@ import java.time.Duration;
 
 public class DependencyMethods {
 
-    private static WebDriver driver;
-    private static WebDriverWait wait;
+    private static ThreadLocal<WebDriver> tldriver = new ThreadLocal<>();
+    private static ThreadLocal<WebDriverWait> tlwait = new ThreadLocal<>();
+
+    public static ThreadLocal<WebDriver> getTldriver() {
+        return tldriver;
+    }
+
+    public static void setTldriver(ThreadLocal<WebDriver> tldriver) {
+        DependencyMethods.tldriver = tldriver;
+    }
 
     @BeforeClass
     @Parameters({"browser"})
     public void setup(String br){
+        WebDriver driver;
+        WebDriverWait wait;
         switch(br){
             case "edge":
                 EdgeOptions edgeOptions = new EdgeOptions();
-                edgeOptions.addArguments("--headless");
+
                 driver = new EdgeDriver(edgeOptions);
                 break;
             case "chrome":
                 ChromeOptions options = new ChromeOptions();
-                options.addArguments("--headless");
+
                 driver = new ChromeDriver(options);
                 break;
             default: return;
         }
-        wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-        driver.get("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login");
         driver.manage().window().maximize();
+        tldriver.set(driver);
+        wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        tlwait.set(wait);
+        driver.get("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login");
+
     }
 
     @Test(priority = 1)
     public void login(){
         System.out.println("Locating username field....");
+        WebDriverWait wait = tlwait.get();
         WebElement username = wait.until(
                 ExpectedConditions.visibilityOfElementLocated(By.name("username"))
         );
@@ -56,7 +71,7 @@ public class DependencyMethods {
         password.sendKeys("admin123");
         System.out.println("Locating login button....");
         WebElement loginBtn = wait.until(
-                ExpectedConditions.elementToBeClickable(By.className("orangehrm-login-button"))
+                ExpectedConditions.elementToBeClickable(By.xpath("//button[@type='submit']"))
         );
         loginBtn.click();
 
@@ -70,6 +85,7 @@ public class DependencyMethods {
     @Test(priority = 2,dependsOnMethods = {"login"})    //wont run if login() fails
     public void search(){
         System.out.println("Locating search bar....");
+        WebDriverWait wait = tlwait.get();
         WebElement search = wait.until(
                 ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@placeholder='Search']"))
         );
@@ -80,6 +96,7 @@ public class DependencyMethods {
 
     @Test(priority = 3, dependsOnMethods = {"login"})       //wont run if login() fails
     public void logout(){
+        WebDriverWait wait = tlwait.get();
         WebElement logoutDropdown = wait.until(
                 ExpectedConditions.elementToBeClickable(By.className("oxd-userdropdown-tab"))
         );
@@ -91,5 +108,14 @@ public class DependencyMethods {
         );
 
         logout.click();
+    }
+
+    @AfterClass
+    public void tearDown(){
+        WebDriver driver = tldriver.get();
+        if(driver != null)
+            driver.quit();
+        tldriver.remove();
+        tlwait.remove();
     }
 }

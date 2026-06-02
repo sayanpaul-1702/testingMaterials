@@ -1,12 +1,13 @@
 package pages;
 
 import base.BasePage;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class LoginPage extends BasePage {
-    WebDriver driver;
+
 
     //constructor
     public LoginPage(WebDriver driver) {
@@ -24,8 +25,9 @@ public class LoginPage extends BasePage {
     @FindBy(className = "orangehrm-login-button")
     WebElement loginBtn;
 
-    @FindBy(xpath = "//div[@role='alert']")
-    WebElement invalidCredentialError;
+    @FindBy(xpath = "//p[normalize-space()='Invalid credentials']")
+    WebElement errorElmt;
+
 
     //action methods
     public LoginPage setInputUsername(String username){
@@ -47,10 +49,12 @@ public class LoginPage extends BasePage {
     }
 
     public String getErrorMessage(){
-        return invalidCredentialError.getText();
+        waitForVisibility(errorElmt);
+        return errorElmt.getText();
     }
 
     public boolean isErrorVisible(){
-        return invalidCredentialError.isDisplayed();
+        waitForVisibility(errorElmt);
+        return errorElmt.isDisplayed();
     }
 }
