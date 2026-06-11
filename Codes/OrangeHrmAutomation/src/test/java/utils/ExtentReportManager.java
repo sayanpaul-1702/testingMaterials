@@ -5,6 +5,7 @@ import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.aventstack.extentreports.reporter.configuration.Theme;
+import driver.DriverManager;
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
@@ -50,6 +51,7 @@ public class ExtentReportManager implements ITestListener {
     public void onTestFailure(ITestResult result) {
         testLogger = extentReport.createTest(result.getName()); //create a new entry in the report
         testLogger.log(Status.FAIL,"Test case FAILED is: " + result.getName());
+
     }
 
     @Override
